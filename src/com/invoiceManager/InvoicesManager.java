@@ -43,9 +43,29 @@ public class InvoicesManager extends JFrame {
         panel.add(searchPanel, BorderLayout.NORTH); // Adds the button to the top part of the panel.
 
         JButton addButton = new JButton("Add Invoice"); // Creates a button
-        // Add action listener for adding invoice button
+        addButton.addActionListener(new ActionListener() { // An event listener that calls the addInvoice() method when the button is clicked.
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addInvoice();
+            }
+        });
         panel.add(addButton, BorderLayout.SOUTH); // Adds the button to the bottom part of the panel.
 
         getContentPane().add(panel); // Adds the panel to the window.
+
     }
+    // The addInvoice() method is called when the user clicks the "Add Invoice" button.
+    private void addInvoice() {
+        // The method uses dialog boxes (JOptionPane) to collect information for the new invoice: number, client, date, and amount
+        String number = JOptionPane.showInputDialog("Invoice Number:"); // Adds the invoice number.
+        String client = JOptionPane.showInputDialog("Client's Name:"); // Adds the client's name.
+        String date = JOptionPane.showInputDialog("Invoice Date:"); // Adds an invoice date.
+        double amount = Double.parseDouble(JOptionPane.showInputDialog("Total Amount:")); // Adds the amount.
+
+        Invoice invoice = new Invoice(number, client, date, amount); // Creates an Invoice instance and assigns the values (number, client name, date, amount) to the invoice
+        invoices.add(invoice); // Adds the created invoice to the list of invoices
+
+        // showInvoices(); // Displays all invoices
+    }
+
 }
