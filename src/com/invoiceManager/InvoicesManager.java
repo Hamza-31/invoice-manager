@@ -65,7 +65,19 @@ public class InvoicesManager extends JFrame {
         Invoice invoice = new Invoice(number, client, date, amount); // Creates an Invoice instance and assigns the values (number, client name, date, amount) to the invoice
         invoices.add(invoice); // Adds the created invoice to the list of invoices
 
-        // showInvoices(); // Displays all invoices
+        showInvoices(); // Displays all invoices
+    }
+    // The showInvoices() method updates the textArea to display the list of invoices.
+    private void showInvoices() {
+        // Before displaying new data, the method clears the current content of the text area.
+        textArea.setText("");
+        // The method iterates through the invoices list and adds the details of each invoice to the text area.
+        for (Invoice invoice : invoices) {
+            textArea.append("Number: " + invoice.number + "\n"); // Displays the invoice number.
+            textArea.append("Client: " + invoice.client + "\n"); // Displays the client's name.
+            textArea.append("Date: " + invoice.date + "\n"); // Displays the invoice date.
+            textArea.append("Amount: " + invoice.amount + "\n\n"); // Displays the invoice amount.
+        }
     }
 
 }
