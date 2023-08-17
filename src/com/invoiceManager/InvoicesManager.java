@@ -36,7 +36,12 @@ public class InvoicesManager extends JFrame {
 
         searchField = new JTextField(15); // The text field for search
         JButton searchButton = new JButton("Search Invoice"); // Creates a button
-        // Add action listener for search button
+        searchButton.addActionListener(new ActionListener() { // An event listener that calls the searchInvoice() method when the button is clicked.
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchInvoice();
+            }
+        });
         JPanel searchPanel = new JPanel(); // Creates a panel for the search form
         searchPanel.add(searchField); // Adds the text field to the panel
         searchPanel.add(searchButton); // Adds the search button to the panel.
@@ -79,5 +84,24 @@ public class InvoicesManager extends JFrame {
             textArea.append("Amount: " + invoice.amount + "\n\n"); // Displays the invoice amount.
         }
     }
-
+    private void searchInvoice() {
+        String search = searchField.getText(); // Retrieves the user's query.
+        textArea.setText(""); // Clears the current content
+        boolean found = false; // A boolean variable used to indicate if an invoice with the search number has been found in the list of invoices.
+        // The method iterates through the list of invoices and displays the invoice details if found.
+        for (Invoice invoice : invoices) {
+            if (invoice.number.equals(search)) {
+                textArea.append("Number: " + invoice.number + "\n");
+                textArea.append("Client: " + invoice.client + "\n");
+                textArea.append("Date: " + invoice.date + "\n");
+                textArea.append("Amount: " + invoice.amount + "\n\n");
+                found = true;
+                break; // Exits the loop after finding the invoice
+            }
+        }
+        // If no invoice is found, an appropriate message is displayed in the text area.
+        if (!found) {
+            textArea.append("No invoice found with this number.");
+        }
+    }
 }
